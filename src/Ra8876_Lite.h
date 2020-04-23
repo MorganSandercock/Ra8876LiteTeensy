@@ -73,10 +73,11 @@ typedef uint32_t	ru32;
 //#define M12L2561616A
 //#define M12L64164A
 //#define W9825G6JH
-#define W9812G6JH
+//#define W9812G6JH
 //#define MT48LC4M16A
 //#define K4S641632N
 //#define K4S281632K
+#define W25Q128JV
 
 /*TFT timing configure*/
 #define TFT_MODE   0  //0:SYNC_mode(SYNC+DE mode), 1: DE mode  //if sync only mode do not connect DE signal or XDE_INV = 1
@@ -107,17 +108,17 @@ memory size. For example : page_size = 1024*600*2byte(16bpp) = 1228800byte, maxi
 #define PAGE1_START_ADDR  0
 #define PAGE2_START_ADDR  1024*600*2   // 1228800 bytes
 #define PAGE3_START_ADDR  1024*600*2*2 // 2457600 
-#define PAGE4_START_ADDR  1024*600*2*3
-#define PAGE5_START_ADDR  1024*600*2*4
-#define PAGE6_START_ADDR  1024*600*2*5
-#define PAGE7_START_ADDR  1024*600*2*6
-#define PAGE8_START_ADDR  1024*600*2*7
-#define PAGE9_START_ADDR  1024*600*2*8
-#define PAGE10_START_ADDR  1024*600*2*9
+#define PAGE4_START_ADDR  1024*600*2*3 // 3,686,400‬
+#define PAGE5_START_ADDR  1024*600*2*4 // 4,915,200
+#define PAGE6_START_ADDR  1024*600*2*5 // 6,144,000‬
+#define PAGE7_START_ADDR  1024*600*2*6 // 7,372,800‬
+//#define PAGE8_START_ADDR  1024*600*2*7 // 8,601,600‬ - over max 8,388,608‬ for 128m chip
+//#define PAGE9_START_ADDR  1024*600*2*8
+//#define PAGE10_START_ADDR  1024*600*2*9
 
-#define PATTERN1_RAM_START_ADDR 1024*600*2*10
-#define PATTERN2_RAM_START_ADDR (1024*600*2*10)+(16*16*2)
-#define PATTERN3_RAM_START_ADDR (1024*600*2*10)+(16*16*2)+(16*16*2)
+#define PATTERN1_RAM_START_ADDR 1024*600*2*6
+#define PATTERN2_RAM_START_ADDR (1024*600*2*6)+(8*8*2)
+#define PATTERN3_RAM_START_ADDR (1024*600*2*6)+(8*8*2)+(8*8*2)
 
 /*DMA picture data start address*/
 #define WP1_ADDR  0
@@ -840,12 +841,12 @@ memory size. For example : page_size = 1024*600*2byte(16bpp) = 1228800byte, maxi
 #define	cClrb6		0xbf
 #define	cClrb7		0x7f
 
-//static volatile ru32 _maxspeed = 20000000;//holder for SPI speed
-static volatile ru32 _maxspeed = 34000000; // This is the fastest useable speed
+static volatile ru32 _maxspeed = 20000000;//holder for SPI speed
+//static volatile ru32 _maxspeed = 34000000; // This is the fastest useable speed
 					   // with my setup.
 //static volatile ru32 _maxspeed = 24000000;//holder for SPI speed
 
-const uint32_t MEM_SIZE_MAX	= 16l*1024l*1024l;	///Max. size in byte of SDRAM
+const uint32_t MEM_SIZE_MAX	= 8388608;	///Max. size in byte of SDRAM
 
 class Ra8876_Lite
 {

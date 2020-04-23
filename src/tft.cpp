@@ -33,11 +33,11 @@
 #include "IntervalTimer.h"
 
 #define RA8876_CS 10 //see below...
-#define RA8876_RESET 21//any pin or nothing!
+#define RA8876_RESET 8//any pin or nothing!
 #define RA8876_MOSI 11
 #define RA8876_SCLK 13
 #define RA8876_MISO 12
-#define RA8876_BACKLITE  20
+#define RA8876_BACKLITE  7
 
 // RA8876 Interrupt Pin
 //#define RA8876_INT  2
@@ -61,11 +61,11 @@ tftSave_t	screenSave1,
 			screenSave3,
 			screenSave4,
 			screenSave5,
-			screenSave6,
-			screenSave7,
-			screenSave8,
-			screenSave9,
-			screenSave10;
+			screenSave6;
+//			screenSave7,
+//			screenSave8,
+//			screenSave9,
+//			screenSave10;
 // Create pointers to each screen save structs
 tftSave_t *screenPage1 = &screenSave1;
 tftSave_t *screenPage2 = &screenSave2;
@@ -73,9 +73,9 @@ tftSave_t *screenPage3 = &screenSave3;
 tftSave_t *screenPage4 = &screenSave4;
 tftSave_t *screenPage5 = &screenSave5;
 tftSave_t *screenPage6 = &screenSave6;
-tftSave_t *screenPage7 = &screenSave7;
-tftSave_t *screenPage8 = &screenSave8;
-tftSave_t *screenPage9 = &screenSave9;
+//tftSave_t *screenPage7 = &screenSave7;
+//tftSave_t *screenPage8 = &screenSave8;
+//tftSave_t *screenPage9 = &screenSave9;
 //tftSave_t *screenPage10 = &screenSave10; // Not used at this time
 
 // Create RA8876 driver instance
@@ -123,10 +123,10 @@ boolean tft_init(void) {
 	saveTFTParams(screenPage3);
 	saveTFTParams(screenPage4);
 	saveTFTParams(screenPage5);
-	saveTFTParams(screenPage6);
-	saveTFTParams(screenPage7);
-	saveTFTParams(screenPage8);
-	saveTFTParams(screenPage9);
+	//saveTFTParams(screenPage6);
+	//saveTFTParams(screenPage7);
+	//saveTFTParams(screenPage8);
+	//saveTFTParams(screenPage9);
 //	saveTFTParams(screenPage10);
 	// Initialize all screen colors to default values
 	tft.currentPage = 999; // Don't repeat screen page 1 init.
@@ -145,22 +145,22 @@ boolean tft_init(void) {
 	selectScreen(PAGE5_START_ADDR);	// Init page 5 screen
 	tft_cls(COLOR65K_DARKBLUE);
 	tft_slcls(COLOR65K_DARKBLUE);
-	selectScreen(PAGE6_START_ADDR);	// Init page 6 screen
-	tft_cls(COLOR65K_DARKBLUE);
-	tft_slcls(COLOR65K_DARKBLUE);
-	selectScreen(PAGE7_START_ADDR);	// Init page 7 screen
-	tft_cls(COLOR65K_DARKBLUE);
-	tft_slcls(COLOR65K_DARKBLUE);
-	selectScreen(PAGE8_START_ADDR);	// Init page 8 screen
-	tft_cls(COLOR65K_DARKBLUE);
-	tft_slcls(COLOR65K_DARKBLUE);
-	selectScreen(PAGE9_START_ADDR);	// Init page 9 screen
-	tft_cls(COLOR65K_DARKBLUE);
-	tft_slcls(COLOR65K_DARKBLUE);
-	selectScreen(PAGE10_START_ADDR);	// Init page 10 screen
-	tft_cls(COLOR65K_DARKBLUE);
-	tft_slcls(COLOR65K_DARKBLUE);
-	selectScreen(PAGE1_START_ADDR); // back to page 1 screen
+	//selectScreen(PAGE6_START_ADDR);	// Init page 6 screen
+	//tft_cls(COLOR65K_DARKBLUE);
+	//tft_slcls(COLOR65K_DARKBLUE);
+	//selectScreen(PAGE7_START_ADDR);	// Init page 7 screen
+	//tft_cls(COLOR65K_DARKBLUE);
+	//tft_slcls(COLOR65K_DARKBLUE);
+	//selectScreen(PAGE8_START_ADDR);	// Init page 8 screen
+	//tft_cls(COLOR65K_DARKBLUE);
+	//tft_slcls(COLOR65K_DARKBLUE);
+	//selectScreen(PAGE9_START_ADDR);	// Init page 9 screen
+	//tft_cls(COLOR65K_DARKBLUE);
+	//tft_slcls(COLOR65K_DARKBLUE);
+	///selectScreen(PAGE10_START_ADDR);	// Init page 10 screen
+	//tft_cls(COLOR65K_DARKBLUE);
+	//tft_slcls(COLOR65K_DARKBLUE);
+	//selectScreen(PAGE1_START_ADDR); // back to page 1 screen
 	
 	//start Touch Screen
 //	touch.begin(getGwidth(),getGheight());
@@ -195,18 +195,18 @@ void selectScreen(uint32_t screenPage) {
 		case PAGE5_START_ADDR:
 			tempSave = screenPage5; 
 			break;
-		case PAGE6_START_ADDR:
-			tempSave = screenPage6; 
-			break;
-		case PAGE7_START_ADDR:
-			tempSave = screenPage7; 
-			break;
-		case PAGE8_START_ADDR:
-			tempSave = screenPage8; 
-			break;
-		case PAGE9_START_ADDR:
-			tempSave = screenPage9; 
-			break;
+//		case PAGE6_START_ADDR:
+//			tempSave = screenPage6; 
+//			break;
+//		case PAGE7_START_ADDR:
+//			tempSave = screenPage7; 
+//			break;
+//		case PAGE8_START_ADDR:
+//			tempSave = screenPage8; 
+//			break;
+//		case PAGE9_START_ADDR:
+//			tempSave = screenPage9; 
+//			break;
 //		case PAGE10_START_ADDR:
 //			tempSave = screenPage10; 
 //			break;
@@ -230,18 +230,18 @@ void selectScreen(uint32_t screenPage) {
 		case PAGE5_START_ADDR:
 			tempRestore = screenPage5; 
 			break;
-		case PAGE6_START_ADDR:
-			tempRestore = screenPage6; 
-			break;
-		case PAGE7_START_ADDR:
-			tempRestore = screenPage7; 
-			break;
-		case PAGE8_START_ADDR:
-			tempRestore = screenPage8; 
-			break;
-		case PAGE9_START_ADDR:
-			tempRestore = screenPage9; 
-			break;
+//		case PAGE6_START_ADDR:
+//			tempRestore = screenPage6; 
+//			break;
+//		case PAGE7_START_ADDR:
+//			tempRestore = screenPage7; 
+//			break;
+//		case PAGE8_START_ADDR:
+//			tempRestore = screenPage8; 
+//			break;
+//		case PAGE9_START_ADDR:
+//			tempRestore = screenPage9; 
+//			break;
 //		case PAGE10_START_ADDR:
 //			tempRestore = screenPage10; 
 //			break;
@@ -928,10 +928,10 @@ void displayTime(void)
 	
 	timeval = rtc_get();
 //printf("timeval = %lu\n",timeval);
-	time_p = localtime( &timeval );
-	strftime(datestr,80,"%a %b %d %Y %I:%M:%S %p", time_p);
+//	time_p = localtime( &timeval );
+//	strftime(datestr,80,"%a %b %d %Y %I:%M:%S %p", time_p);
 //	mktime(datestr,80,"%a %b %d %Y %I:%M:%S %p", time_p);
-	if(tft.RA8876_BUSY == false) { // do not write to display if SPI is busy
+/*	if(tft.RA8876_BUSY == false) { // do not write to display if SPI is busy
 		tft.check2dBusy();
 		tft._FNTheight = 24;
 		tft._FNTwidth = 16;
@@ -940,7 +940,7 @@ void displayTime(void)
 		tft._FNTheight = tempFNTHeight;
 		tft._FNTwidth = tempFNTWidth;
 		tft.buildTextScreen();
-	}
+	}*/
 }
 
 // turn on time display on status line

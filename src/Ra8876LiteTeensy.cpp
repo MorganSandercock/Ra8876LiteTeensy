@@ -434,6 +434,7 @@ boolean Ra8876_Lite::checkSdramReady(void)
  for(i=0;i<1000000;i++) //Please according to your usage to modify i value.
  { 
    delayMicroseconds(1);
+   Serial.println(lcdStatusRead()&0x04, HEX);
    if( (lcdStatusRead()&0x04)==0x04 )
     {return true;}
     
@@ -740,6 +741,18 @@ ru16	Auto_Refresh;
   lcdRegDataWrite(0xe3,Auto_Refresh>>8);
   lcdRegDataWrite(0xe4,0x01);
  #endif
+ 
+ #ifdef W25Q128JV
+  CAS_Latency=3;
+  Auto_Refresh=(64*DRAM_FREQ*1000)/(4096);	
+  Auto_Refresh=Auto_Refresh-2; 
+  lcdRegDataWrite(0xe0,0x28);      
+  lcdRegDataWrite(0xe1,CAS_Latency);      //CAS:2=0x02，CAS:3=0x03
+  lcdRegDataWrite(0xe2,Auto_Refresh);
+  lcdRegDataWrite(0xe3,Auto_Refresh>>8);
+  lcdRegDataWrite(0xe4,0x01);
+ #endif
+ 
   return checkSdramReady();
 }
 
@@ -2478,9 +2491,9 @@ void Ra8876_Lite::scroll(void) { // No arguments for now
 //*************************************************************//
 void Ra8876_Lite::scroll_down(void) { // No arguments for now
 	bteMemoryCopy(currentPage,SCREEN_WIDTH, _scrollXL, _scrollYT,	//Source
-				  PAGE10_START_ADDR,SCREEN_WIDTH, _scrollXL, _scrollYT,	//Desination
+				  PAGE5_START_ADDR,SCREEN_WIDTH, _scrollXL, _scrollYT,	//Desination
 				  _scrollXR-_scrollXL, (_scrollYB-_scrollYT)-(_FNTheight*_scaleY)); //Copy Width, Height
-	bteMemoryCopy(PAGE10_START_ADDR,SCREEN_WIDTH, _scrollXL, _scrollYT,	//Source
+	bteMemoryCopy(PAGE5_START_ADDR,SCREEN_WIDTH, _scrollXL, _scrollYT,	//Source
 				  currentPage,SCREEN_WIDTH, _scrollXL, _scrollYT+(_FNTheight*_scaleY),	//Desination
 				  _scrollXR-_scrollXL, (_scrollYB-_scrollYT)-_FNTheight); //Copy Width, Height
 	// Clear top text line

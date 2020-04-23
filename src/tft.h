@@ -41,9 +41,9 @@
 #define SCREEN_4  1024*600*2*3
 #define SCREEN_5  1024*600*2*4
 #define SCREEN_6  1024*600*2*5
-#define SCREEN_7  1024*600*2*6
-#define SCREEN_8  1024*600*2*7
-#define SCREEN_9  1024*600*2*8
+//#define SCREEN_7  1024*600*2*6
+//#define SCREEN_8  1024*600*2*7
+//#define SCREEN_9  1024*600*2*8
 //#define SCREEN_10  1024*600*2*9 // Used for CGRAM at this time
 
 typedef struct boxSaveGet boxSaveGet_t;
